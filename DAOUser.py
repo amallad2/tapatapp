@@ -109,12 +109,12 @@ class UserDAO:
                 access_token = self.create_token()
                 user.token = access_token  # Emmagatzema el token a la base de dades
                 session.commit()
-                return access_token
+                return (1,access_token)
 
-            return "Invalid credentials"
+            return (0,"Invalid credentials")
         except Exception as e:
             session.rollback()
-            return "msg:" + str(e)
+            return (-1,"msg:" + str(e))
         finally:
             session.close()
     
@@ -130,7 +130,7 @@ class UserDAO:
         token = ''.join(secrets.choice(alphabet) for _ in range(64))
         return token    
 
-# Exemples d'ús del DAO
+'''# Exemples d'ús del DAO
 if __name__ == "__main__":
     # Base de dades MySQL per provar
     DATABASE_URL = "mysql+pymysql://root:root@localhost/tapatapp"
@@ -153,4 +153,6 @@ if __name__ == "__main__":
         print(f"Found: {user.username}, {user.email}")
 
     r = dao.login_user("johndoe","password123")
-    print(r)
+    print(r[1])
+    print(r[0])
+'''
