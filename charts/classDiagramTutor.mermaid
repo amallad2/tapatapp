@@ -2,6 +2,7 @@ classDiagram
 Usuari "" --> "0..N" Child
 Child "" --> "1..1" Treatment
 Child "" --> "0..N" Tap
+Tap "" --> "1..1" Status
 
 class Usuari {
         -int id
@@ -17,8 +18,9 @@ class Child{
         -String child_name
         -int sleep_average
         
-        +consultarTractament: Treatment
+        +consultarTractament: obj(Treatment)
         +consultarTap: array(Tap)
+        +estatActual(Tap:array): Tap
 }
 
 class Treatment{
@@ -30,5 +32,10 @@ class Tap{
         -int id
         -int status
         -datetime init 
-        -datetime end 
+        -datetime end
+}
+
+class Status{
+        -int id
+        -int name
 }
