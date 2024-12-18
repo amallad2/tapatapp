@@ -1,16 +1,29 @@
 import datetime
 import secrets
 import string
+import requests
 
 def provaFunc():
     return "PROVA FUNC"
 
-#print("HOLA")
-#alphabet = string.ascii_letters + string.digits  # a-z, A-Z, 0-9
-# Generar un token de 16 caracteres (puedes ajustar el tamaño)
-#token = ''.join(secrets.choice(alphabet) for _ in range(64))
-#print(token)
-#print(token)
-#print(token)
+
+
+# Define the URL and data payload
+url = "http://localhost:5000/provapost"
+data = {
+    "username": "value1",
+    "key2": "value2",
+}
+
+headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+}
+
+# Send the POST request
+response = requests.post(url, data=data, headers=headers)
+
+# Print the response
+print("Status Code:", response.status_code)
+print("Response Body:", response.text)
 
 

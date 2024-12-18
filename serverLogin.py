@@ -32,5 +32,12 @@ def protected():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
+# Content-Type: application/x-www-form-urlencoded
+@app.route("/provapost", methods=["POST"])
+def provapost():
+    username = request.form.get('username')  
+    print(request.form.listvalues)
+    return jsonify(username), 200
+
 if __name__ == "__main__":
     app.run(debug=True)
