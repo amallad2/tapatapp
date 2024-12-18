@@ -1,0 +1,34 @@
+classDiagram
+Usuari "" --> "0..N" Child
+Child "" --> "1..1" Treatment
+Child "" --> "0..N" Tap
+
+class Usuari {
+        -int id
+        -String username
+        -String password
+        -String contrasenya
+        +consultarInfants(): void
+        +iniciarSessio(): boolean
+}
+
+class Child{
+        -int id
+        -String child_name
+        -int sleep_average
+        
+        +consultarTractament: Treatment
+        +consultarTap: array(Tap)
+}
+
+class Treatment{
+        -int id
+        -String name
+}
+
+class Tap{
+        -int id
+        -int status
+        -datetime init 
+        -datetime end 
+}
