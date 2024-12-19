@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert'; // Importa la biblioteca dart:convert
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -39,20 +40,16 @@ class LoginPage extends StatelessWidget {
     final username = _usernameController.text;
     final password = _passwordController.text;
 
-    // Llamada al web service
-    final response = await http.post(
-      Uri.parse('https://your-web-service-url.com/login'),
-      body: {'username': username, 'password': password},
+    final response = await http.get(
+      Uri.parse('http://192.168.117.95:5000/prova'),
     );
 
     if (response.statusCode == 200) {
-      // Manejar respuesta exitosa
-      Navigator.pushReplacementNamed(context, '/home');
+      final data = response.body;
+      print('Response data: $data');
+      Navigator.pushNamed(context, '/list');
     } else {
-      // Manejar error
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed')),
-      );
+      print('Failed to load data: ${response.statusCode}');
     }
   }
 }

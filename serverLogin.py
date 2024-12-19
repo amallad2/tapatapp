@@ -12,6 +12,21 @@ jwt = JWTManager(app)
 
 users = {"user1": "password1", "user2": "password2"}
 
+@app.route('/prova', methods=['GET'])
+def prova():
+    return "HOLA"
+
+
+@app.route('/login2', methods=['GET'])
+def login2():
+    dades = [
+        {"id": 1, "nom": "Usuari 1", "email": "usuari1@example.com", "rol": "administrador"},
+        {"id": 2, "nom": "Usuari 2", "email": "usuari2@example.com", "rol": "editor"},
+        {"id": 3, "nom": "Usuari 3", "email": "usuari3@example.com", "rol": "visor"},
+    ]
+    return jsonify(dades), 200
+
+
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
@@ -40,4 +55,4 @@ def provapost():
     return jsonify(username), 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
